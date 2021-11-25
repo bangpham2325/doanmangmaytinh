@@ -1,0 +1,102 @@
+{% with previous_page=url_for('webui.index'), title="Client list" %}
+{% include "header.html" %}
+{% endwith %}
+
+<div class="container">
+  <section id="main_content">
+
+      <br><br><br><br><br><br><br>
+      <form method="post" action="{{ url_for('api.mass_execute') }}">
+      <input type="text" name="cmd" id="cmd" style="width: 50%;padding: 7.5px 15px;margin-bottom: 10px;border: 1px solid #cccccc;outline: none;border-radius: 10px;"style="width:50%" />
+      <input style="padding: 7.5px 15px; border-radius: 2px; background-color: #92561f; color: #ffffff; border: none; outline: none;" type="submit" name="execute" value="Run on selection" />
+      <input style="padding: 7.5px 15px; border-radius: 2px; background-color: #92561f; color: #ffffff; border: none; outline: none;" type="submit" name="delete" value="Delete selection" onclick="return confirm('Remove selected agents from list ?')"/>
+
+      <table class="customers">
+      <tr><th>Name</th><th>Last Online</th><th>User</th><th>Host</th><th>IP</th><th>OS</th><th>Geolocation</th><th>Change name</th><th>Sel.</th></tr>
+      {% for agent in agents %}
+      <tr>
+        <td><a href="{{ url_for('webui.agent_detail', agent_id=agent.id) }}" style="text-decoration: none">{{agent.display_name}}</a>  </td>
+        <td>{% if agent.last_online %}{% if agent.is_online() %}ONLINE{%else%}{{agent.last_online.strftime('%Y/%m/%d %H:%M')}}{%endif%}{% endif %}</td>
+        <td>{{agent.username}}</td>
+        <td>{{agent.hostname}}</td>
+        <td>{{agent.remote_ip}}</td>
+        <td>{{agent.operating_system}}</td>
+        <td>{{agent.geolocation}}</td>
+        <td><a href="#" onclick="changeName('{{agent.id}}', '{{agent.display_name}}')" style="text-decoration: none">Change name</a></td>
+        <td><input type="checkbox" id="checkbox_{{agent.id}}" name="selection" value="{{agent.id}}" /></td>
+      {% endfor %}
+      </table>
+      </form>
+  </section>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+function changeName(agentid, name) {
+    var newname = prompt("New name", name);
+    $.post("{{ url_for('webui.rename_agent') }}", {'newname': newname, 'id': agentid}, function() {window.location.reload();});
+}
+
+function keypressed(e){
+    if(e.keyCode === 13){
+        send_command();
+    }
+    return false;
+}
+function send_command(e) {
+    if(!$(".botid:checked").length){
+      alert('Please select at least one bot !');
+      return;
+    }
+    $(".botid:checked").each(function(){
+      
+    });
+    $('#cmd').val('');
+    return false;
+}
+</script>
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+  canvas {
+      display:block;
+  }
+  body{
+      background-color: black;
+  }
+  </style>
+  <canvas id="c" style="position: fixed; z-index:-9999"></canvas>
+  <script>
+  var c = document.getElementById("c");
+  var ctx = c.getContext("2d");
+  c.height = window.innerHeight;
+  c.width = window.innerWidth;
+  var matrix = "Hacked by GrouSrlpPrsc :)";
+  matrix = matrix.split("");
+  var font_size = 10;
+  var columns = c.width/font_size;
+  var drops = [];
+  for(var x = 0; x < columns; x++)
+      drops[x] = 1; 
+  function draw()
+  {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
+      ctx.fillRect(0, 0, c.width, c.height);
+      ctx.fillStyle = "#0F0";
+      ctx.font = font_size + "px arial";
+      for(var i = 0; i < drops.length; i++)
+      {
+          var text = matrix[Math.floor(Math.random()*matrix.length)];
+          //x = i*font_size, y = value of drops[i]*font_size
+          ctx.fillText(text, i*font_size, drops[i]*font_size);
+          if(drops[i]*font_size > c.height && Math.random() > 0.975)
+              drops[i] = 0;
+          drops[i]++;
+      }
+  }
+  setInterval(draw, 35);
+  </script>
+
+{% include "footer.html" %}

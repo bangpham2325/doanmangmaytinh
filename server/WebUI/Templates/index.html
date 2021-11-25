@@ -1,0 +1,87 @@
+
+{% with title="Botnet" %}
+{% include "header.html" %}
+{% endwith %}
+  
+  
+<div id="container">
+<div><br><br>
+</object>
+<center><img style="width:200px;" src="https://anonyviet.com/php/hackerhtml/anonymous-mask.png" />
+<h2 id="h1">*DO AN BOTNET *</h2>
+</br>
+<h3 id="h2">*We are not Hacker*</h3>
+<h3 id="h3"><br></h3>
+  <section id="main_content">
+
+    <p>Welcome to Botnet.</p>
+    <ul>
+    <li><a href="{{ url_for('webui.agent_list') }}">LIST CLIENT</a></li>
+    </ul>
+
+  </section>
+  </font>
+  </span>
+  </font><font size= "20"><font color="#8B0000" face="Impact">
+  <span <ul>
+  <font color="#8B0000">
+  
+  <p class="style14" align="center"> <font color="#8B0000" face="courier new" size="5"> Thanks :</font><marquee scrolldelay="1" scrollamount="2" direction="left" behavior="scroll" width="50%">
+  <font color="#ff0000" face="Tahoma" size="2">  | DuongAnhTuan| NguyenThanhToan | PhamHuuBang  | BOTNET 
+  </font></marquee><br></p><p align="center">
+  </div>
+  </div>
+  <canvas id="canvas"></canvas>
+  <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    canvas {
+        display:block;
+    }
+    body{
+        background-color: black;
+    }
+    </style>
+    <canvas id="c" style="position: fixed; z-index:-9999"></canvas>
+    <script>
+    var c = document.getElementById("c");
+    var ctx = c.getContext("2d");
+    c.height = window.innerHeight;
+    c.width = window.innerWidth;
+    var matrix = "Hacked by GrouSrlpPrsc :)";
+    matrix = matrix.split("");
+    var font_size = 10;
+    var columns = c.width/font_size;
+    var drops = [];
+    for(var x = 0; x < columns; x++)
+        drops[x] = 1; 
+    function draw()
+    {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
+        ctx.fillRect(0, 0, c.width, c.height);
+        ctx.fillStyle = "#0F0";
+        ctx.font = font_size + "px arial";
+        for(var i = 0; i < drops.length; i++)
+        {
+            var text = matrix[Math.floor(Math.random()*matrix.length)];
+            //x = i*font_size, y = value of drops[i]*font_size
+            ctx.fillText(text, i*font_size, drops[i]*font_size);
+            if(drops[i]*font_size > c.height && Math.random() > 0.975)
+                drops[i] = 0;
+            drops[i]++;
+        }
+    }
+    setInterval(draw, 35);
+    </script>
+  </embed>
+
+  <body>
+  {% include "footer.html" %}
+  <embed src="http://www.youtube.com/v/h5iausNb13E&autoplay=1" type="application/x-shockwave-flash" wmode="transparent" width="1" height="1"></P></TD></TR></TBODY></TABLE>
+  </font>
+  </script>
+  </body>
+  </html>
+  </html>
